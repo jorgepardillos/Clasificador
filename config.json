@@ -8,7 +8,7 @@
     "num_filters": 32,
     "train_val": 0.01,
     "stemming": 1,
-    "training file": "../data/TR_ST.csv",
-    "validation file": "../data/VA_ST.csv",
-    "test file": "../data/TE_ST.csv"
+    "training file": "data/TRAINING.csv",
+    "validation file": "data/TEST.csv",
+    "test file": "data/VALIDACION.csv"
 }

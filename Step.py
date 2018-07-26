@@ -17,11 +17,10 @@ def STEP(x, y, params, W_m, b_m, dropout):
 	#EMBEDDING LAYER
 	#--> IN: (RAE, embedding_dim)
 	#--> OUT: (batch_size, length_phrase, embedding_dim, 1)
-	with tf.device('/cpu:0'):
-		with tf.name_scope('emedding_layer'):
-			W_embed = W_m['embed']
-			EMBED = tf.nn.embedding_lookup(W_embed, x)
-			x_emb = tf.expand_dims(EMBED, -1)
+	with tf.name_scope('emedding_layer'):
+		W_embed = W_m['embed']
+		EMBED = tf.nn.embedding_lookup(W_embed, x)
+		x_emb = tf.expand_dims(EMBED, -1)
 	
 	#CONVOLUTIONAL LAYER + POOLING
 	#--> IN: (batch_size, length_phrase, embedding_dim, 1)

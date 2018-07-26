@@ -30,7 +30,8 @@ def map_word_to_RAE(x, Voc_Dict):
 
 
 def load_test_data(file, categorias, params, Voc_Dict, seq_len):
-	data=pd.read_csv(file,header=None, usecols=[0,1])
+	data=pd.read_csv(file,header=None, usecols=[0,1], delimiter=';', encoding='utf-8')
+	data = data.drop(data[data[1] == 'liniaObertaWSLOE'].index)
 
 	num_cat = len(categorias)
 	one_hot = np.zeros((num_cat, num_cat), int)
@@ -57,7 +58,7 @@ def load_test_data(file, categorias, params, Voc_Dict, seq_len):
 	return x_test, y_test
 
 
-def train(train_file, test_file, config):
+def train(config):
 	best_acc= 0
 	ACCURACY_CV = []
 	ACCURACY_TRAIN = []
@@ -73,6 +74,7 @@ def train(train_file, test_file, config):
 
 	x_test, y_test = load_test_data(test_file, Categorias, params, Voc_Dict, X_0.shape[1])
 	
+	X_0, x_test, Y_0, y_test = train_test_split(X_0, Y_0, test_size=0.1)
 	_, x_train_v, _, y_train_v = train_test_split(X_0, Y_0, test_size=params['train_val'])
 	x_train = X_0
 	y_train = Y_0
@@ -259,8 +261,6 @@ def train(train_file, test_file, config):
 
 
 if __name__ == '__main__':
-	train_data="variaciones.csv"
 	config="config.json"
-	test_file = 'Test.csv'
-	train(train_data, test_file, config)
+	train(config)
 

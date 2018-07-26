@@ -36,7 +36,6 @@ def stemming(x, stem_value):
 	return st
 
 def limpieza(s):
-	#s = re.sub(r"[^A-Za-z0-9:(),!?\'\`]", " ", s)
 	s = re.sub(r":", " : ", s)
 	s = re.sub(r"\.", " . ", s)
 	s = re.sub(r",", " , ", s)
@@ -76,7 +75,7 @@ def RAE(x):
 	
 	
 def Read_Data(file, stem_value):
-	data=pd.read_csv(file,header=None, usecols=[0,1])
+	data=pd.read_csv(file,header=None, usecols=[0,1], delimiter=';', encoding='utf-8')
 	data = data.drop(data[data[1] == 'liniaObertaWSLOE'].index)
 	
 	#Y
@@ -91,7 +90,7 @@ def Read_Data(file, stem_value):
 	print("------------------DEBUG Categories-------------------")
 	print("------------------------------------------------------\n\n")
 	for i,j in enumerate(np.array(y).sum(axis=0)):
-		print('----->In', categorias[i], 'there are',j, 'entries')
+		print('----->In', categorias[i], 'there are', j, 'entries')
 	print("\n**",len(categorias) , "Categories succefully loaded\n\n")
 	
 	#X
